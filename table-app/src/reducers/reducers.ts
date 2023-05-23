@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import tableReducer from "./tableReducer";
-// Add your reducer imports here
-// import { yourReducer } from './yourReducer';
+import tableReducer, { TableState } from "./TableReducer";
 
-const rootReducer = combineReducers({
-  table: tableReducer, // A
+export interface RootState {
+  table: TableState;
+}
+
+const rootReducer = combineReducers<RootState>({
+  table: tableReducer,
 });
 
 export default rootReducer;
