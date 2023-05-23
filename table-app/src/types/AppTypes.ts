@@ -4,7 +4,7 @@ export type TableData = {
   lastName: string;
   email: string;
   city: string;
-  registeredAt: Date;
+  registeredAt: String;
   fullName: string;
   dsr: number;
 };

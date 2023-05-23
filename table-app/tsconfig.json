@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/**/*"
+    "src/**/*",
+    "../dump/layout.tsx"
   ],
   "exclude": ["node_modules"]
 }

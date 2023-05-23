@@ -1,33 +1,24 @@
 import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import * as TableTypes from "./types";
 
-interface TableColumn {
-  key: string;
-  label: string;
-}
-
-type ColumnOrder = string[];
-
-interface TableProps {
-  className?: string;
-  columns: TableColumn[];
-  data: any[];
-  onRowClick?: (rowData: any) => void;
-  onColumnOrderChange?: React.Dispatch<React.SetStateAction<ColumnOrder>>;
-}
-
-const initialColumnOrder: ColumnOrder = [
+const initialColumnOrder: TableTypes.ColumnOrder = [
   "id",
   "firstName",
   "lastName",
   "email",
   "city",
-  "registeredDate",
+  "registeredAt",
   "fullName",
   "dsr",
 ];
 
-const Table: React.FC<TableProps> = ({
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toDateString();
+};
+
+const TableComponent: React.FC<TableTypes.TableProps> = ({
   className,
   columns,
   data,
@@ -84,7 +75,11 @@ const Table: React.FC<TableProps> = ({
         {data.map((row, index) => (
           <tr key={row.id} onClick={() => handleRowClick(row)}>
             {columns.map((column) => (
-              <td key={column.key}>{row[column.key]}</td>
+              <td key={column.key}>
+                {column.key === "registeredAt"
+                  ? formatDate(row[column.key])
+                  : row[column.key]}
+              </td>
             ))}
           </tr>
         ))}
@@ -93,4 +88,4 @@ const Table: React.FC<TableProps> = ({
   );
 };
 
-export default Table;
+export default TableComponent;
